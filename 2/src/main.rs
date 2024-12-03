@@ -9,7 +9,10 @@ fn load_input(path: &str) -> Vec<Vec<i32>> {
     for line in buffered.lines() {
         match line {
             Ok(line) => {
-                let numbers: Vec<i32> = line.split_whitespace().map(|num| num.parse().unwrap()).collect();
+                let numbers: Vec<i32> = line
+                    .split_whitespace()
+                    .map(|num| num.parse().unwrap())
+                    .collect();
                 data.push(numbers);
             }
             Err(e) => {
@@ -28,16 +31,22 @@ fn check_row(row: &Vec<i32>) -> bool {
 
     for number in iterator {
         if number > previous_value {
-            if increasing == Some(false) { return false; }
+            if increasing == Some(false) {
+                return false;
+            }
             increasing = Some(true);
-        }
-        else if number < previous_value {
-            if increasing == Some(true) {return false;}
+        } else if number < previous_value {
+            if increasing == Some(true) {
+                return false;
+            }
             increasing = Some(false);
+        } else {
+            return false;
         }
-        else {return false;}
 
-        if (number - previous_value).abs() > 3 {return false;}
+        if (number - previous_value).abs() > 3 {
+            return false;
+        }
         previous_value = number;
     }
     true
@@ -46,8 +55,7 @@ fn check_row(row: &Vec<i32>) -> bool {
 fn check_row_lenient(row: &Vec<i32>) -> bool {
     if check_row(row) {
         return true;
-    }
-    else {
+    } else {
         for i in 0..row.len() {
             let mut new_row = row.clone();
             new_row.remove(i);
@@ -66,7 +74,10 @@ fn problem_1(input_data: &Vec<Vec<i32>>) {
 }
 
 fn problem_2(input_data: &Vec<Vec<i32>>) {
-    let sum: usize = input_data.iter().filter(|row| check_row_lenient(row)).count();
+    let sum: usize = input_data
+        .iter()
+        .filter(|row| check_row_lenient(row))
+        .count();
     println!("solution 2: {}", sum);
 }
 
