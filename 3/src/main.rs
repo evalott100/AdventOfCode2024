@@ -1,5 +1,6 @@
 use regex::Regex;
 use std::fs;
+use std::time::Instant;
 
 fn load_input(path: &str) -> String {
     fs::read_to_string(path).expect("Failed to read file")
@@ -40,7 +41,23 @@ fn solution_2(input: &str) -> i32 {
 }
 
 fn main() {
+    let input_start = Instant::now();
     let input = load_input("input.dat");
-    println!("solution_1: {}", solution_1(&input));
-    println!("solution_2: {}", solution_2(&input));
+    println!("input took {:?}", input_start.elapsed());
+
+    let solution_1_start = Instant::now();
+    let output_1 = solution_1(&input);
+    println!(
+        "solution_1: {}, took {:?}",
+        output_1,
+        solution_1_start.elapsed()
+    );
+
+    let solution_2_start = Instant::now();
+    let output_2 = solution_2(&input);
+    println!(
+        "solution_2: {}, took {:?}",
+        output_2,
+        solution_2_start.elapsed()
+    );
 }
