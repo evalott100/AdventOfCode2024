@@ -8,3 +8,4 @@ repository = "https://github.com/evalott100/advent-of-code2024"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+rayon = "1.5"
